@@ -1,7 +1,7 @@
 class CreateOffers < ActiveRecord::Migration[6.0]
   def change
     create_table :offers do |t|
-      t.string :name, null: false
+      t.string :advertiser_name, null: false
       t.string :url, null: false
       t.string :description, null: false
       t.datetime :active_from, null: false
