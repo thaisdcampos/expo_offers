@@ -1,4 +1,6 @@
 class OffersController < ApplicationController
+  before_action verify_status
+
   def index
     @offers = Offer.all
   end
@@ -49,5 +51,9 @@ class OffersController < ApplicationController
       :active_until,
       :premium
     )
+  end
+
+  def verify_status
+    Offer.verify_status
   end
 end
