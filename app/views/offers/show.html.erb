@@ -1,0 +1,5 @@
+<h1><%= @offer.advertiser_name %></h1>
+<p><%= @offer.description %></p>
+
+<%= button_to "Edit Offer", edit_offer_path(@offer), method: :get %>
+<%= button_to "Back Home", offers_path, method: :get %>
