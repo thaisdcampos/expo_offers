@@ -1,8 +1,10 @@
 class OffersController < ApplicationController
-  before_action verify_status
+  #before_action verify_status, unless: -> { @offer.nil? }
 
   def index
     @offers = Offer.all
+    @offers_enabled = Offer.enabled
+    @offers_disabled = Offer.disabled
   end
 
   def new
@@ -13,6 +15,7 @@ class OffersController < ApplicationController
     @offer = Offer.new(permitted_params)
 
     if @offer.save!
+      flash[:notice] = 'Offer was successfully created'
       redirect_to offer_path(@offer)
     end
   end
@@ -30,6 +33,7 @@ class OffersController < ApplicationController
     @offer.update(permitted_params)
 
     if @offer.save!
+      flash[:notice] = 'Offer was successfully updated'
       redirect_to offer_path(@offer)
     end
   end
@@ -37,13 +41,14 @@ class OffersController < ApplicationController
   def destroy
     @offer = Offer.find(params[:id]).destroy
 
+    flash[:notice] = 'Offer was successfully deleted'
     redirect_to offers_path
   end
 
   private
 
   def permitted_params
-    params.require(:offer).permit(
+    params.permit(
       :advertiser_name,
       :url,
       :description,
