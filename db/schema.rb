@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 2020_04_16_115059) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["active_from"], name: "index_offers_on_active_from"
+    t.index ["premium"], name: "index_offers_on_premium"
+    t.index ["status"], name: "index_offers_on_status"
   end
 
 end
