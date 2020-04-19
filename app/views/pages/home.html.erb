@@ -1,0 +1,10 @@
+<h3>All offers</h3>
+<ul>
+  <% if @offers.present? %>.
+    <% @offers.each do |offer| %>
+      <li><%= link_to offer.advertiser_name, offer.url %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+
