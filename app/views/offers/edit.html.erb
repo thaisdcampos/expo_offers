@@ -1,0 +1,21 @@
+<h1><%= "EDIT: " + @offer.advertiser_name %></h1>
+
+<%= form_for(@offer) do |f| %>
+    <%= f.label :advertiser_name%><br>
+    <%= f.text_field :advertiser_name%><br>
+     <br><%= f.label :url%><br>
+    <%= f.text_area :url%><br>
+    <br><%= f.label :description%><br>
+    <%= f.text_area :description%><br>
+     <br><%= f.label :active_from%><br>
+    <%= f.datetime_select :active_from %>
+    <br><%= f.label :active_until%><br>
+    <%= f.datetime_select :active_until %>
+    <br><%= f.label "Premium" %> <br />
+    <%= f.check_box :premium %> <br />
+
+    <br><%= f.submit %><br>
+<% end %>
+
+<br><%= button_to "Delete Offer", @offer, :method => :delete, data: {confirm: 'Are you sure?'} %>
+
