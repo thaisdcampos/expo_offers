@@ -4,12 +4,16 @@ class CreateOffers < ActiveRecord::Migration[6.0]
       t.string :advertiser_name, null: false
       t.string :url, null: false
       t.string :description, null: false
-      t.datetime :active_from, null: false
-      t.datetime :active_until
+      t.date :active_from, null: false
+      t.date :active_until
       t.boolean :premium
       t.integer :status, default: 0
 
       t.timestamps
     end
+
+    add_index :offers, :status
+    add_index :offers, :premium
+    add_index :offers, :active_from
   end
 end

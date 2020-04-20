@@ -1,7 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Offer.create!(advertiser_name: 'Oferta de comida', url: 'www.big.com.br', description: 'Super desconto no big', active_from: (Date.current + 1.day), premium: true, status: :enabled )
+Offer.create!(advertiser_name: 'Oferta de roupa', url: 'www.dafiti.com.br', description: 'Super desconto na dafiti', active_from: (Date.current + 4.days), premium: true, status: :disabled)
+Offer.create!(advertiser_name: 'Oferta de esportes', url: 'www.centauro.com.br', description: 'Desconto na centauro', active_from: (Date.current + 3.days), premium: false, status: :disabled )
+Offer.create!(advertiser_name: 'Oferta de calçados', url: 'www.netshoes.com.br', description: 'Desconto em calçados', active_from: (Date.current + 2.days), premium: false, status: :enabled )
+Offer.create!(advertiser_name: 'Oferta de brinquedos', url: 'www.hihappy.com.br', description: 'Desconto em brinquedos', active_from: (Date.current + 1.day), premium: false, status: :enabled )
+
