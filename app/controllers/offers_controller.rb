@@ -3,8 +3,6 @@ class OffersController < ApplicationController
 
   def index
     @offers = Offer.all
-    @offers_enabled = Offer.enabled
-    @offers_disabled = Offer.disabled
   end
 
   def new
@@ -48,7 +46,7 @@ class OffersController < ApplicationController
   private
 
   def permitted_params
-    params.permit(
+    params.require(:offer).permit(
       :advertiser_name,
       :url,
       :description,
@@ -56,9 +54,5 @@ class OffersController < ApplicationController
       :active_until,
       :premium
     )
-  end
-
-  def verify_status
-    Offer.verify_status
   end
 end
