@@ -8,9 +8,9 @@
     <br><%= f.label :description%><br>
     <%= f.text_area :description%><br>
      <br><%= f.label :active_from%><br>
-    <%= f.datetime_select :active_from %>
+     <%= f.date_field :active_from, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
     <br><%= f.label :active_until%><br>
-    <%= f.datetime_select :active_until %>
+    <%= f.date_field :active_until, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
     <br><%= f.label "Premium" %> <br />
     <%= f.check_box :premium %> <br />
 

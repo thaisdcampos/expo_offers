@@ -16,11 +16,14 @@ RSpec.describe "Offers", type: :request do
   context 'create a new offer' do
     let(:params) do
       {
-        advertiser_name: 'Offer criation',
-        url: 'www.test.com',
-        description: 'description',
-        active_from: Date.current,
-        premium: false
+        offer: {
+          advertiser_name: 'Offer criation',
+          url: 'www.test.com',
+          description: 'description',
+          active_from: Date.current,
+          active_until: '',
+          premium: false
+        }
       }
     end
 
@@ -38,7 +41,13 @@ RSpec.describe "Offers", type: :request do
 
   context 'update a offer' do
     let(:offer) { create(:offer, advertiser_name: 'Offer to update', status: :enabled) }
-    let(:params) { { advertiser_name: 'Name changed' } }
+    let(:params) do
+      {
+        offer: {
+          advertiser_name: 'Name changed'
+        }
+      }
+    end
 
     before do
       put "/offers/#{offer.id}", params: params
@@ -46,7 +55,7 @@ RSpec.describe "Offers", type: :request do
     end
 
     it 'changes a updated attribure' do
-      expect(offer[:advertiser_name]).to eq params[:advertiser_name]
+      expect(offer[:advertiser_name]).to eq params[:offer][:advertiser_name]
     end
 
     it 'show a successfully message' do

@@ -44,7 +44,7 @@ class OffersController < ApplicationController
   private
 
   def permitted_params
-    params.permit(
+    params.require(:offer).permit(
       :advertiser_name,
       :url,
       :description,
