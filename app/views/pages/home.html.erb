@@ -1,10 +1,22 @@
-<h3>All offers</h3>
-<ul>
+<nav class="navbar navbar-light" style="background-color: #18ed8a;">
+  <span class="navbar-brand mb-0 h1">Ofertas disponiveis</span>
+</nav>
+
+<div class="card-deck">
   <% if @offers.present? %>.
     <% @offers.each do |offer| %>
-      <li><%= link_to offer.advertiser_name, offer.url %></li>
+      <div class="col mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= offer.advertiser_name%></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= premium?(offer.premium)%></h6>
+            <p class="card-text"><%= offer.description%></p>
+            <a href="<%= offer.url %>" class="card-link">Compre agora</a>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% end %>
-</ul>
+</div>
 
 

@@ -10,7 +10,9 @@ class Offer < ApplicationRecord
 
   enum status: { disabled: 0, enabled: 1 }, _scopes: true
 
-  def verify_status
+  before_save :add_url_protocol
+
+  def set_offer_availability
     return if correct_status?
 
     self.status = self.enabled? ? :disabled : :enabled
@@ -39,5 +41,10 @@ class Offer < ApplicationRecord
     if self.active_until.past?
       errors.add(:active_until, 'Can\'t be in the past')
     end
+  end
+
+  def add_url_protocol
+    return if  self.url[/\Ahttp:\/\//] || self.url[/\Ahttps:\/\//]
+    self.url = "http://#{self.url}"
   end
 end
