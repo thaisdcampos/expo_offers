@@ -10,7 +10,7 @@ class Offer < ApplicationRecord
 
   enum status: { disabled: 0, enabled: 1 }, _scopes: true
 
-  def verify_status
+  def set_offer_availability
     return if correct_status?
 
     self.status = self.enabled? ? :disabled : :enabled

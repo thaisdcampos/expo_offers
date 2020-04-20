@@ -1,8 +1,6 @@
-job_type :sidekiq, "cd :path && :environment_variable=:environment bundle exec sidekiq-client push :task :output"
-
-set :output, "log/cron.log"
+job_type :rake, "cd :path && RAILS_ENV=:environment rake :task :output"
 
 every 2.minutes do
-  sidekiq 'VerifyUnavailableOffersJob'
+  rake 'offer:verify_offer_availability', output: {error: 'log/cron-error.log', standard: 'log/cron.log'}
 end
 

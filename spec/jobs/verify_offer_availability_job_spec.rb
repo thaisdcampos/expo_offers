@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe VerifyUnavailableOffersJob, type: :job do
+RSpec.describe VerifyOfferAvailabilityJob, type: :job do
   include ActiveJob::TestHelper
 
   context '#perform' do
@@ -12,8 +12,8 @@ RSpec.describe VerifyUnavailableOffersJob, type: :job do
       expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
     end
 
-    it 'changes status' do
-      expect { VerifyUnavailableOffersJob.perform_later }.to have_enqueued_job.on_queue('default')
+    it 'ensures that the job use the queue default' do
+      expect { VerifyOfferAvailabilityJob.perform_later }.to have_enqueued_job.on_queue('default')
     end
   end
 end
