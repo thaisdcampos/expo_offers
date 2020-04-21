@@ -1,6 +1,8 @@
 class OffersController < ApplicationController
   def index
     @offers = Offer.all
+    @enabled_offers = Offer.enabled
+    @disabled_offers = Offer.disabled
   end
 
   def new

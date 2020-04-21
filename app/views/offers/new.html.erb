@@ -1,6 +1,7 @@
 <h1>CREATE NEW OFFER</h1>
 
 <%= form_for(@offer) do |f| %>
+  <div class="form-group">
     <%= f.label :advertiser_name%><br>
     <%= f.text_field :advertiser_name%><br>
     <br><%= f.label :url%><br>
@@ -15,4 +16,5 @@
     <%= f.check_box :premium %> <br />
 
     <br><%= f.submit %>
+  </div>
 <% end %>
