@@ -2,11 +2,18 @@ class VerifyOfferAvailabilityJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    #offers = Offer.where('created_at = ?', Time.current.yesterday)
-    offers = Offer.all
+    disabled_offer = Offer.disabled.where('active_from <= ?', Time.current)
+    enabled_offer = Offer.enabled.where('active_until >= ?', Time.current)
+    offers = enabled_offer.concat(disabled_offer)
 
     offers.each do |offer|
       offer.set_offer_availability
     end
+
+    debugger
+    VerifyOfferAvailabilityJob.set(wait: 2.minutes).perform_later
+  rescue => error
+    Rails.logger.error error.message
+    VerifyOfferAvailabilityJob.set(wait: 2.minutes).perform_later
   end
 end

@@ -6,10 +6,10 @@ RSpec.describe VerifyOfferAvailabilityJob, type: :job do
   context '#perform' do
     let(:offer) { create(:offer) }
 
-    subject(:job) { described_class.perform_later }
+    subject(:offer_job) { described_class.perform_later }
 
     it 'ensures that the job has been scheduled' do
-      expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
+      expect { offer_job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
     end
 
     it 'ensures that the job use the queue default' do
