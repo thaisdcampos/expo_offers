@@ -10,7 +10,6 @@ class VerifyOfferAvailabilityJob < ApplicationJob
       offer.set_offer_availability
     end
 
-    debugger
     VerifyOfferAvailabilityJob.set(wait: 2.minutes).perform_later
   rescue => error
     Rails.logger.error error.message
