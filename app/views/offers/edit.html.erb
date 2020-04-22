@@ -23,13 +23,17 @@
     <%= f.label 'Data de encerramento'%><br>
     <%= f.date_select :active_until, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
   </div>
-  <div class="form-check form-check-inline">
+  <div class="form-check">
     <%= f.check_box :premium, value: true,class: "form-check-input" %>
     <%= f.label "Premium", class: "form-check-label" %>
   </div>
   <div class="form-check form-check-inline">
-    <%= f.check_box :status, value: :disable, class: "form-check-input" %>
-    <%= f.label "Desativar oferta", class: "form-check-label" %>
+    <%= f.radio_button :status, :enabled,  class: "form-check-input" %>
+    <%= f.label "Ativo", class: "form-check-label" %>
+  </div>
+  <div class="form-check form-check-inline">
+    <%= f.radio_button :status, :disabled, class: "form-check-input", value: :disabled %>
+    <%= f.label "Inativo", class: "form-check-label" %>
   </div>
 
   <div>
