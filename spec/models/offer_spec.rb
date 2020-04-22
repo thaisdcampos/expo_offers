@@ -25,12 +25,12 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  context 'verify_status' do
+  context 'set_offer_availability' do
     context 'when offer is disable on valid period' do
       let(:offer) { create(:offer, advertiser_name: 'Bleah', active_until: '')}
 
       it 'change the status offer' do
-        offer.verify_status
+        offer.set_offer_availability
 
         expect(offer.enabled?).to be_truthy
       end
@@ -42,7 +42,7 @@ RSpec.describe Offer, type: :model do
       let(:offer) { create(:offer, advertiser_name: 'blah', active_until: tomorrow, status: :enabled) }
 
       it 'returns a disable status' do
-        offer.verify_status
+        offer.set_offer_availability
 
         travel_to tomorrow do
           expect(offer.disabled?).to be_truthy
