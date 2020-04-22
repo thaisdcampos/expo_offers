@@ -13,21 +13,11 @@ class Offer < ApplicationRecord
   before_save :add_url_protocol
 
   def set_offer_availability
-    return if correct_status?
-
     self.status = self.enabled? ? :disabled : :enabled
     self.save!
   end
 
   private
-
-  def correct_status?
-    if self.active_until.present? && Time.current <= self.active_until
-      disabled?
-    elsif Time.current >= self.active_from
-      enabled?
-    end
-  end
 
   def active_from_valid
     if self.active_from.past?
