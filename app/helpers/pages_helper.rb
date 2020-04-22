@@ -1,0 +1,5 @@
+module PagesHelper
+  def premium?(premium)
+    'Premium' if premium
+  end
+end

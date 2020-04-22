@@ -1,10 +1,27 @@
-<h3>All offers</h3>
-<ul>
-  <% if @offers.present? %>.
-    <% @offers.each do |offer| %>
-      <li><%= link_to offer.advertiser_name, offer.url %></li>
+<div class="container">
+  <% if @offers.present? %>
+    <% @offers.in_groups_of(3).each do |items| %>
+      <div class="row">
+        <% items.each do |offer| %>
+          <div class="col-lg-4 my-3">
+            <% if offer %>
+              <div class="card h-100">
+                <%if offer.premium %>
+                  <div class="card-header">
+                    <p class="text-right font-weight-bold">Premium</p>
+                  </div>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= offer.advertiser_name%></h5>
+                  <p class="card-text"><%= offer.description%></p>
+                  <a href="<%= offer.url %>" target='_blank' class="card-link">Compre agora</a>
+                </div>
+              </div>
+            <%end%>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
-</ul>
-
+</div>
 

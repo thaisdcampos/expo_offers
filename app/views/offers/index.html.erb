@@ -1,20 +1,39 @@
 <% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
+  <div class="alert alert-success" role="alert">
+    <%= flash[:notice] %>
+  </div>
 <% end %>
 
-<h1>OFFERS LIST</h1>
+<%= button_to "Criar nova oferta", new_offer_path, method: :get, class: 'btn btn-primary float-right m-3' %>
 
-<h3>All offers</h3>
-<ul>
-  <% if @offers.present? %>.
-    <% @offers.each do |offer| %>
-      <li><%= link_to offer.advertiser_name, offer_path(offer.id) %></li>
-      <li><%= offer.active_from %></li>
-      <li><%= offer.active_until %></li>
-    <% end %>
-  <% end %>
-</ul>
-
-<%= button_to "Create Offers", new_offer_path, method: :get %>
-
+<% if @offers.present? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nome do anúncio</th>
+        <th scope="col">Link</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Data de ativacão</th>
+        <th scope="col">Data de encerramento</th>
+        <th scope="col">Premium</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @offers.each do |offer| %>
+        <tr class="table-row" style="cursor:pointer" data-href="<%= offer_path(offer.id) %>">
+          <td><%= offer.advertiser_name %></th>
+          <td><%= offer.url %></td>
+          <td><%= offer.description %></td>
+          <td><%= start_date(offer.active_from) %></td>
+          <td><%= has_end_date?(offer.active_until) %></td>
+          <td><%= offer_premium?(offer.premium) %></td>
+          <td><%= current_status(offer.status) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p><%= "Não existem ofertas." %></p>
+<% end %>
 
