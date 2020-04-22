@@ -35,7 +35,7 @@ RSpec.describe "Offers", type: :request do
       post '/offers', params: params
 
       follow_redirect!
-      expect(response.body).to include('Offer was successfully created')
+      expect(response.body).to include('Oferta criada com sucesso')
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe "Offers", type: :request do
 
     it 'show a successfully message' do
       follow_redirect!
-      expect(response.body).to include('Offer was successfully updated')
+      expect(response.body).to include('Oferta atualizada com sucesso')
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "Offers", type: :request do
       delete "/offers/#{offer.id}"
 
       follow_redirect!
-      expect(response.body).to include('Offer was successfully deleted')
+      expect(response.body).to include('Oferta removida com sucesso')
     end
   end
 end

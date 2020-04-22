@@ -32,7 +32,7 @@ class OffersController < ApplicationController
     @offer.update(update_permitted_params)
 
     if @offer.save
-      flash[:success] = 'Ofeta atualizada com sucesso'
+      flash[:success] = 'Oferta atualizada com sucesso'
       redirect_to offer_path(@offer)
     else
       flash[:error] = 'Não foi possível atualizar a ofeta'

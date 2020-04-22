@@ -17,11 +17,11 @@
   </div>
   <div class="form-group">
     <%= f.label 'Data de ativação (*)' %><br>
-    <%= f.date_select :active_from, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
+    <%= f.date_field :active_from, :id => "datepicker" %>
   </div>
   <div class="form-group">
     <%= f.label 'Data de encerramento'%><br>
-    <%= f.date_select :active_until, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
+    <%= f.date_field :active_until, :id => "datepicker" %>
   </div>
   <div class="form-check">
     <%= f.check_box :premium, class: "form-check-input" %>

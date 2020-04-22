@@ -4,7 +4,7 @@ class VerifyOfferAvailabilityJob < ApplicationJob
   def perform(*args)
     disabled_offer = Offer.disabled.where('active_from <= ?', Time.current)
     enabled_offer = Offer.enabled.where('active_until >= ?', Time.current)
-    offers = enabled_offer.concat(disabled_offer)
+    offers = enabled_offer + disabled_offer
 
     offers.each do |offer|
       offer.set_offer_availability

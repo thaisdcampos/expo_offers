@@ -20,7 +20,7 @@ class Offer < ApplicationRecord
   private
 
   def active_from_valid
-    if self.active_from.past?
+    if self.active_from < Date.current
       errors.add(:active_from, 'Can\'t be in the past')
     end
   end
@@ -28,7 +28,7 @@ class Offer < ApplicationRecord
   def active_until_valid
     return unless self.active_until.present?
 
-    if self.active_until.past?
+    if self.active_until < Date.current
       errors.add(:active_until, 'Can\'t be in the past')
     end
   end
