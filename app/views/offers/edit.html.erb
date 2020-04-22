@@ -1,21 +1,44 @@
-<h1><%= "EDIT: " + @offer.advertiser_name %></h1>
-
-<%= form_for(@offer) do |f| %>
-    <%= f.label :advertiser_name%><br>
-    <%= f.text_field :advertiser_name%><br>
-     <br><%= f.label :url%><br>
-    <%= f.text_area :url%><br>
-    <br><%= f.label :description%><br>
-    <%= f.text_area :description%><br>
-     <br><%= f.label :active_from%><br>
-     <%= f.date_field :active_from, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
-    <br><%= f.label :active_until%><br>
-    <%= f.date_field :active_until, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
-    <br><%= f.label "Premium" %> <br />
-    <%= f.check_box :premium %> <br />
-
-    <br><%= f.submit %><br>
+<% if flash[:error] %>
+  <div class="alert alert-danger" role="alert"><%= flash[:error] %></div>
 <% end %>
 
-<br><%= button_to "Delete Offer", @offer, :method => :delete, data: {confirm: 'Are you sure?'} %>
+<%= form_for(@offer) do |f| %>
+  <div class="form-group">
+    <%= f.label 'Nome da oferta (*)' %><br>
+    <%= f.text_field :advertiser_name, class: "form-control" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Link (*)' %><br>
+    <%= f.text_field :url, class: "form-control" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Descrição (*)' %><br>
+    <%= f.text_area :description, class: "form-control" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Data de ativação (*)' %><br>
+    <%= f.date_select :active_from, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Data de encerramento'%><br>
+    <%= f.date_select :active_until, as: :date, value: f.object.try(:strftime,"%d/%m/%Y"), class: 'form-control' %>
+  </div>
+  <div class="form-check form-check-inline">
+    <%= f.check_box :premium, value: true,class: "form-check-input" %>
+    <%= f.label "Premium", class: "form-check-label" %>
+  </div>
+  <div class="form-check form-check-inline">
+    <%= f.check_box :status, value: :disable, class: "form-check-input" %>
+    <%= f.label "Desativar oferta", class: "form-check-label" %>
+  </div>
+
+  <div>
+    <%= f.submit "Salvar alteração", class: "btn btn-success my-3 mr-3 float-left" %>
+  </div>
+<% end %>
+
+<div class="clearfix">
+  <%= button_to "Voltar ao início", offers_path, method: :get, class: "btn btn-secondary my-3 mr-3 float-left" %>
+  <%= button_to "Remover oferta", @offer, :method => :delete, data: {confirm: 'Deseja continuar?'}, class: "btn btn-danger my-3 float-left" %>
+</div>
 

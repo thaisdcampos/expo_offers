@@ -1,9 +1,37 @@
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
+<% if flash[:success] %>
+  <div class="alert alert-success" role="alert"><%= flash[:success] %></div>
 <% end %>
 
-<h1><%= @offer.advertiser_name %></h1>
-<p><%= @offer.description %></p>
+<div class="row">
+  <div class="col"><%= 'Nome da oferta:' %></div>
+  <div class="col"><%= @offer.advertiser_name %></div>
+</div>
+<div class="row">
+  <div class="col"><%= 'Link:' %></div>
+  <div class="col"><%= @offer.url %></div>
+</div>
+<div class="row">
+  <div class="col"><%= 'Descrição:' %></div>
+  <div class="col"><%= @offer.description %></div>
+</div>
+<div class="row">
+  <div class="col"><%= 'Data de ativação:' %></div>
+  <div class="col"><%= start_date(@offer.active_from) %></div>
+</div>
+<div class="row">
+  <div class="col"><%= 'Data de encerramento:' %></div>
+  <div class="col"><%= has_end_date?(@offer.active_until) %></div>
+</div>
+<div class="row">
+  <div class="col"><%= 'Premium:' %></div>
+  <div class="col"><%= offer_premium?(@offer.premium) %></div>
+</div>
+<div class="row">
+  <div class="col"><%= 'Status:' %></div>
+  <div class="col"><%= current_status(@offer.status) %></div>
+</div>
 
-<%= button_to "Edit Offer", edit_offer_path(@offer), method: :get %>
-<%= button_to "Back Home", offers_path, method: :get %>
+<div class="clearfix my-3">
+  <%= button_to "Editar Oferta", edit_offer_path(@offer), method: :get, class: "btn btn-success mr-3 float-left" %>
+  <%= button_to "Voltar ao início", offers_path, method: :get, class: "btn btn-secondary float-left" %>
+</div>

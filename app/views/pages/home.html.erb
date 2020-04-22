@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel=”stylesheet” href=”./node_modules/bootstrap/dist/css/bootstrap.css”>
-    <div class="container-fluid">
-      <nav class="navbar navbar-light" style="background-color: #18ed8a;">
-        <span class="navbar-brand mb-0 h1">Ofertas disponíveis</span>
-      </nav>
-    </div>
-  </head>
-  <body>
-    <div class="container flex-wrap align-items-stretch align-content-around">
-      <div class="row justify-content-md-center">
-        <% if @offers.present? %>.
-          <% @offers.each do |offer| %>
-            <div class="col-lg-3 d-inline-block">
+<div class="container">
+  <% if @offers.present? %>
+    <% @offers.in_groups_of(3).each do |items| %>
+      <div class="row">
+        <% items.each do |offer| %>
+          <div class="col-lg-4 my-3">
+            <% if offer %>
               <div class="card h-100">
                 <%if offer.premium %>
                   <div class="card-header">
@@ -29,16 +17,11 @@
                   <a href="<%= offer.url %>" class="card-link">Compre agora</a>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <%end%>
+          </div>
         <% end %>
       </div>
-    </div>
-
-    <script src=”./node_modules/jquery/dist/jquery.slim.min.js”></script>
-    <script src=”./node_modules/popper.js/dist/popper.min.js”></script>
-    <script src=”./node_modules/bootstrap/dist/js/bootstrap.js”></script>
-  </body>
-</html>
-
+    <% end %>
+  <% end %>
+</div>
 

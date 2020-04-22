@@ -21,7 +21,7 @@
     </thead>
     <tbody>
       <% @offers.each do |offer| %>
-        <tr class="table-row" data-href="<%= edit_offer_path(offer.id) %>">
+        <tr class="table-row" style="cursor:pointer" data-href="<%= offer_path(offer.id) %>">
           <td><%= offer.advertiser_name %></th>
           <td><%= offer.url %></td>
           <td><%= offer.description %></td>
