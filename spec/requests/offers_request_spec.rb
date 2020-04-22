@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Offers", type: :request do
+RSpec.describe 'Offers', type: :request do
   context 'request list of all offers' do
     before { create(:offer, advertiser_name: 'My first offer', status: :enabled) }
 

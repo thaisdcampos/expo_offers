@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :offer do
     advertiser_name { 'Advertiser Name' }
     url { 'http://advertizername.com/' }
-    description { "MyString" }
+    description { 'MyString' }
     active_from { Date.current }
     active_until { Date.current + 45.days }
     premium { false }

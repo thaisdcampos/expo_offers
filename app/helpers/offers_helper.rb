@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OffersHelper
   def start_date(date)
     date.strftime('%d/%m/%Y')

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Offer < ApplicationRecord
-  URI_FORMAT_VALIDATE = /(https?:\/\/)?(w{3}\.)?(?:[-a-z0-9]+\.)+[a-z]{2,}(\/)?(\?[-A-Za-z0-9+&=_]+)?/
+  URI_FORMAT_VALIDATE = %r{(https?://)?(w{3}\.)?(?:[-a-z0-9]+\.)+[a-z]{2,}(/)?(\?[-A-Za-z0-9+&=_]+)?}.freeze
 
   validates :advertiser_name, :url, :description, :active_from, presence: true
   validates_uniqueness_of :advertiser_name
@@ -13,28 +15,29 @@ class Offer < ApplicationRecord
   before_save :add_url_protocol
 
   def set_offer_availability
-    self.status = self.enabled? ? :disabled : :enabled
-    self.save!
+    self.status = enabled? ? :disabled : :enabled
+    save!
   end
 
   private
 
   def active_from_valid
-    if self.active_from < Date.current
+    if active_from < Date.current
       errors.add(:active_from, 'Can\'t be in the past')
     end
   end
 
   def active_until_valid
-    return unless self.active_until.present?
+    return unless active_until.present?
 
-    if self.active_until < Date.current
+    if active_until < Date.current
       errors.add(:active_until, 'Can\'t be in the past')
     end
   end
 
   def add_url_protocol
-    return if  self.url[/\Ahttp:\/\//] || self.url[/\Ahttps:\/\//]
-    self.url = "http://#{self.url}"
+    return if  url[%r{\Ahttp://}] || url[%r{\Ahttps://}]
+
+    self.url = "http://#{url}"
   end
 end

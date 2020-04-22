@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Offer, type: :model do
@@ -27,7 +29,7 @@ RSpec.describe Offer, type: :model do
 
   context 'set_offer_availability' do
     context 'when offer is disable on valid period' do
-      let(:offer) { create(:offer, advertiser_name: 'Bleah', active_until: '')}
+      let(:offer) { create(:offer, advertiser_name: 'Bleah', active_until: '') }
 
       it 'change the status offer' do
         offer.set_offer_availability
@@ -35,7 +37,6 @@ RSpec.describe Offer, type: :model do
         expect(offer.enabled?).to be_truthy
       end
     end
-
 
     context 'when the active until arrived' do
       let(:tomorrow) { Time.current.tomorrow }
